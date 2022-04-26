@@ -1,0 +1,38 @@
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.android.library'
+
+def androidID = rootProject.ext.androidID
+def dependenciesID = rootProject.ext.dependenciesID
+def testDependenciesID = rootProject.ext.testDependenciesID
+def testAndroidDependenciesID = rootProject.ext.testAndroidDependenciesID
+
+android {
+    compileSdk androidID.compileSdk
+
+    defaultConfig {
+        minSdk androidID.minSdk
+        targetSdk androidID.targetSdk
+
+        testInstrumentationRunner androidID.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    api project(':annotation')//    annotationProcessor project(':arouter-compiler')
+    api project(':annotation')
+    annotationProcessor project(':butterknife-compiler')
+}

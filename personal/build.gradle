@@ -1,0 +1,75 @@
+apply plugin: 'org.jetbrains.kotlin.android'
+if (isRelease) { // 正式环境
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+apply plugin: 'kotlin-kapt'
+
+def androidID = rootProject.ext.androidID
+def appId = rootProject.ext.appID.personModule
+def dependenciesID = rootProject.ext.dependenciesID
+def testDependenciesID = rootProject.ext.testDependenciesID
+def testAndroidDependenciesID = rootProject.ext.testAndroidDependenciesID
+
+android {
+    compileSdk androidID.compileSdk
+
+    defaultConfig {
+        if (!isRelease) {
+            applicationId appId
+            versionCode androidID.versionCode
+            versionName androidID.versionName
+        }
+
+        minSdk androidID.minSdk
+        targetSdk androidID.targetSdk
+
+        testInstrumentationRunner androidID.testInstrumentationRunner
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isRelease) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude "**/debug/**" // 屏蔽测试代码
+                }
+            } else {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(path: ':common')
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    dependenciesID.each { k, v -> implementation v }
+    testImplementation testDependenciesID.junit
+    testAndroidDependenciesID.each { k, v -> androidTestImplementation v }
+    kapt project(":arouter-compiler")
+}

@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) // or FAIL_ON_PROJECT_REPOS
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+        maven { url 'https://maven.testfairy.com' }
+        maven { url './my-plugin' }
+    }
+}
+
+rootProject.name = "Interview"
+include ':app'
+include ':butterknife-compiler'
+include ':personal'
+include ':common'
+include ':annotation'
+include ':arouter-compiler'
+include ':asm'

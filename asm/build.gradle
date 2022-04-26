@@ -1,0 +1,44 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+dependencies {
+    //gradle sdk
+    implementation gradleApi()
+    //groovy sdk
+    implementation localGroovy()
+
+    implementation 'com.android.tools.build:gradle:4.2.2', {
+        exclude group:'org.ow2.asm'
+    }
+    // https://mvnrepository.com/artifact/org.ow2.asm/asm
+    implementation 'org.ow2.asm:asm:9.3'
+    implementation 'org.ow2.asm:asm-commons:9.3'
+}
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'vip.lovek.asm'
+            artifactId = 'asm-plugin'
+            version = '1.0.0'
+
+            from components.java
+        }
+    }
+
+    repositories {
+//        mavenLocal()
+        maven {
+            //提交到远程服务器：
+            // repository(url: "http://www.xxx.com/repos") {
+            //    authentication(userName: "admin", password: "admin")
+            // }
+            //本地的 Maven 地址:当前工程下
+            url = uri("${rootProject.projectDir}/asm-plugin")
+        }
+    }
+}

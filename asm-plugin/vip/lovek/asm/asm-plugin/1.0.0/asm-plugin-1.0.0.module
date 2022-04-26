@@ -1,0 +1,89 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "vip.lovek.asm",
+    "module": "asm-plugin",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "asm-plugin-1.0.0.jar",
+          "url": "asm-plugin-1.0.0.jar",
+          "size": 19490,
+          "sha512": "5ff68c21bec057e917a88cdc919f86eab70c7782d61149a58c59e09cd5d0a80f75030adde9a47acb590a892591e8bbeaacf9879abd7e1aabd9a6d7270c9d7073",
+          "sha256": "e1bf45de50496422408d9fb75684c0c418887a7fe52a022ff81066fb7b6ac746",
+          "sha1": "dbdace0a6abe8a638f95bbd50cb525551b8c3593",
+          "md5": "fc70a712b3cfa3186e5f92ced75cb835"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "4.2.2"
+          },
+          "excludes": [
+            {
+              "group": "org.ow2.asm",
+              "module": "*"
+            }
+          ]
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.3"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "asm-plugin-1.0.0.jar",
+          "url": "asm-plugin-1.0.0.jar",
+          "size": 19490,
+          "sha512": "5ff68c21bec057e917a88cdc919f86eab70c7782d61149a58c59e09cd5d0a80f75030adde9a47acb590a892591e8bbeaacf9879abd7e1aabd9a6d7270c9d7073",
+          "sha256": "e1bf45de50496422408d9fb75684c0c418887a7fe52a022ff81066fb7b6ac746",
+          "sha1": "dbdace0a6abe8a638f95bbd50cb525551b8c3593",
+          "md5": "fc70a712b3cfa3186e5f92ced75cb835"
+        }
+      ]
+    }
+  ]
+}
