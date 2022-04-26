@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Interview"
+rootProject.name = "interview"
 include ':app'
 include ':butterknife-compiler'
 include ':personal'
